@@ -1,17 +1,11 @@
 /*
  * @Date: 2022-10-20 21:32:51
  * @LastEditors: xuanyi_ge xuanyige87@gmail.com
- * @LastEditTime: 2022-10-22 12:31:48
+ * @LastEditTime: 2022-10-22 15:54:01
  * @FilePath: \NodeReactProject-FE\src\components\register\index.tsx
  */
-import React, {
-  useMemo
-  , useState
-} from "react";
-import {
-  getCode,
-  identifyCode
-} from "@/api/module.register/code";
+import React, { useCallback, useMemo, useState } from "react";
+import { getCode, identifyCode } from "@/api/module.register/code";
 import {
   StepExtend,
   StepsExtend,
@@ -22,15 +16,12 @@ import {
   RightCircleTwoToneExtend,
   LeftCircleTwoToneExtend,
 } from "./index.css";
-import {
-  MailOutlined,
-  CheckSquareTwoTone
-} from "@ant-design/icons";
+import { MailOutlined, CheckSquareTwoTone } from "@ant-design/icons";
 import styled from "@emotion/styled";
 import _ from "lodash";
-import { Form } from "antd"
+import { Form, Button } from "antd";
 const titles = ["填写邮箱", "验证邮箱", "设置密码", "设置昵称", "完成注册"];
-const labes = ["邮箱", "验证码", "密码", "昵称", ""];
+const labels = ["Email", "Code", "Password", "昵称", ""];
 const Mail = styled(MailOutlined)`
   margin-top: 1rem;
   font-size: 5rem;
@@ -40,23 +31,39 @@ const Register = () => {
   const [current, setCurrent] = useState(0);
   const stepsAll = titles.length - 1;
   const [inputValue, setInputValue] = useState("");
+  const [isAbled, setIsAbled] = useState(false);
+  const [timer, setTimer] = useState(60);
   const container: Array<string> = useMemo(() => {
     return new Array(stepsAll);
   }, [stepsAll]);
+  const timeCallback = function () {
+    const t = setInterval(() => {
+      if (timer > 1) setTimer((timer) => timer - 1)
+      else clearInterval(t);
+    }, 1000)
+  };
   const [form] = Form.useForm();
   const rightButton = async () => {
     let isNext: boolean = true;
     switch (current) {
       case 0:
-        const reg = new RegExp(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/);
+        //检验邮箱合法性
+        const reg = new RegExp(
+          /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+        );
         if (reg.test(inputValue)) {
+          //获取验证码
           const { status: _get } = await getCode(inputValue);
           isNext = _get === 200;
+          // 倒计时
+          setIsAbled(() => true);
+          timeCallback();
         } else {
           isNext = false;
         }
         break;
       case 1:
+        //验证验证码是否正确
         const { status: _identify } = await identifyCode(
           container[0],
           inputValue
@@ -64,6 +71,7 @@ const Register = () => {
         isNext = _identify === 200;
         break;
     }
+    // 验证通过，放行
     if (isNext) {
       if (current < stepsAll) {
         container[current] = inputValue;
@@ -72,14 +80,15 @@ const Register = () => {
     } else {
       console.log("error");
     }
+    // 重置input框
     form.resetFields();
-  }
+  };
   const leftButton = () => {
     if (current > 0) {
-      setCurrent(() => current - 1)
-      form.resetFields()
+      setCurrent(() => current - 1);
+      form.resetFields();
     }
-  }
+  };
   return (
     <Wrapper>
       <StepsExtend current={current}>
@@ -91,28 +100,47 @@ const Register = () => {
         {current < stepsAll ? (
           <>
             <Mail></Mail>
-            <div
+            <FormItemExtend>
+              <FormItemExtend
+                name="input"
+                style={{ width: "100%" }}
+              >
+                <InputExtend
+                  prefix={labels[current]}
+                  value={inputValue}
+                  onChange={_.debounce((e) => setInputValue(e.target.value))}
+                />
+              </FormItemExtend>
+              {current === 1 ? (
+                <Button
+                  size="small"
+                  disabled={isAbled}
+                  style={{
+                    position: "absolute",
+                    display: "block",
+                    top: "50%",
+                    height: "100%",
+                    transform: "translateY(-50%)",
+                    right: 0,
+                  }}
+                >
+                  {!isAbled ? "重发" : timer + "s"}
+                </Button>
+              ) : (
+                ""
+              )}
+            </FormItemExtend>
+            <FormItemExtend
+              name="buttons"
               style={{
-                position: "relative",
-                left: "3rem",
-                bottom: "-2rem",
+                margin: 0,
+                top: "90%",
               }}
             >
-              {labes[current]}
-            </div>
-            <FormItemExtend name="uEmail">
-              <InputExtend
-                value={inputValue}
-                onChange={_.debounce((e) => setInputValue(e.target.value))}
-              ></InputExtend>
-            </FormItemExtend>
-            <FormItemExtend>
               <RightCircleTwoToneExtend
                 onClick={rightButton}
               />
-              <LeftCircleTwoToneExtend
-                onClick={leftButton}
-              />
+              <LeftCircleTwoToneExtend onClick={leftButton} name="left" />
             </FormItemExtend>
           </>
         ) : (

@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-20 21:32:38
  * @LastEditors: xuanyi_ge xuanyige87@gmail.com
- * @LastEditTime: 2022-10-21 21:49:39
+ * @LastEditTime: 2022-10-22 14:21:19
  * @FilePath: \NodeReactProject-FE\src\components\login\index.tsx
  */
 import {
@@ -21,7 +21,8 @@ import  _login  from "@/api/module.login/login"
 export default function Login() {
   const [uAccount, setAccount] = useState("默认账号");
   const [password, setPassword] = useState("默认密码");
-  const [userInfo,setUserInfo] = useState({} as loginResponse["userInfo"])
+  const [userInfo, setUserInfo] = useState({} as loginResponse["userInfo"])
+  console.log(userInfo);
   let response = {} as loginResponse;
   const login = async () => {
     response = await _login({ uAccount, password });
@@ -48,7 +49,7 @@ export default function Login() {
                 onChange={_.debounce((e) => setPassword(() => e.target.value))}
               ></InputExtend>
             </FormItemExtend>
-            <FormItemExtend>
+            <FormItemExtend name="buttons">
               <ButtonExtend
                 type="primary"
                 htmlType="submit"
