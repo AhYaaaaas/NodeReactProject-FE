@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-21 16:39:58
  * @LastEditors: xuanyi_ge xuanyige87@gmail.com
- * @LastEditTime: 2022-10-21 22:19:38
+ * @LastEditTime: 2022-10-22 10:53:37
  * @FilePath: \NodeReactProject-FE\src\components\register\index.css.tsx
  */
 import styled from "@emotion/styled"
@@ -37,7 +37,7 @@ const FormItemExtend = styled(FormItem)`
   width: 80%;
   margin: 0 auto;
   margin-top: 2rem;
-  &:nth-child(2){
+  &:nth-of-type(2){
     position: relative;
   }
 `
