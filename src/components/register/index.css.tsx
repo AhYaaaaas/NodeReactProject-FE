@@ -1,12 +1,12 @@
 /*
  * @Date: 2022-10-21 16:39:58
  * @LastEditors: xuanyi_ge xuanyige87@gmail.com
- * @LastEditTime: 2022-10-21 17:42:50
+ * @LastEditTime: 2022-10-21 22:19:38
  * @FilePath: \NodeReactProject-FE\src\components\register\index.css.tsx
  */
 import styled from "@emotion/styled"
-import { Steps, Form, Input, Button } from 'antd'
-import { RightCircleTwoTone } from "@ant-design/icons"
+import { Steps, Form, Input } from 'antd'
+import { RightCircleTwoTone,LeftCircleTwoTone } from "@ant-design/icons"
 const { Step } = Steps;
 const FormItem = Form.Item;
 const StepsExtend = styled(Steps)`
@@ -28,7 +28,7 @@ const FormExtend = styled(Form)`
   position:absolute;
   top:50%;
   left:50%;
-  transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-75%);
   border-radius: 20px;
   display: flow-root;
   background-color: white;
@@ -37,27 +37,26 @@ const FormItemExtend = styled(FormItem)`
   width: 80%;
   margin: 0 auto;
   margin-top: 2rem;
+  &:nth-child(2){
+    position: relative;
+  }
 `
 const InputExtend = styled(Input)``
-const ButtonExtend = styled(Button)`
-display:block;
-margin:0 auto;
-border-radius:50%;
-width: 2rem;
-height: 2rem;
-visibility: hidden;
-`
-const RightCircleTwoToneExtend = styled(RightCircleTwoTone)`
-  display:block;
-  position:relative;
-  left: 50%;
+const rowSpan = `
+  position:absolute;
   font-size: 2rem;
-  top:50%;
   border:none;
   margin: 0;
   padding: 0;
-  transform:translateX(-50%) translateY(-50%);
-  visibility: visible;
+  display:block;
+`
+const RightCircleTwoToneExtend = styled(RightCircleTwoTone)`
+  ${rowSpan}
+  right:10%;
+`
+const LeftCircleTwoToneExtend = styled(LeftCircleTwoTone)`
+  ${rowSpan}
+  left:10%;
 `
 export {
   StepsExtend,
@@ -66,6 +65,6 @@ export {
   FormExtend,
   FormItemExtend,
   InputExtend,
-  ButtonExtend,
-  RightCircleTwoToneExtend
+  RightCircleTwoToneExtend,
+  LeftCircleTwoToneExtend
 }

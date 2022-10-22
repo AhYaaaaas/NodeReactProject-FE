@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-21 13:02:12
  * @LastEditors: xuanyi_ge xuanyige87@gmail.com
- * @LastEditTime: 2022-10-21 17:30:23
+ * @LastEditTime: 2022-10-21 21:54:43
  * @FilePath: \NodeReactProject-FE\src\components\login\index.css.tsx
  */
 import styled from "@emotion/styled"
@@ -23,7 +23,7 @@ const FormExtend = styled(Form)`
   border-radius: 10px;
   box-shadow:-5px -5px 5px #edf1f4 , 5px 5px 5px #CED2D5;
   transform: translateY(-50%) translateX(-50%);
-  left:50%;
+  left:30%;
   display:flex;
   flex-direction: column;
 `

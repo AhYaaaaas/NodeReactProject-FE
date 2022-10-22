@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-21 19:38:54
  * @LastEditors: xuanyi_ge xuanyige87@gmail.com
- * @LastEditTime: 2022-10-21 19:57:43
+ * @LastEditTime: 2022-10-21 21:29:36
  * @FilePath: \NodeReactProject-FE\src\utils\http\index.ts
  */
 import axios from "axios";
@@ -19,7 +19,7 @@ instance.interceptors.request.use((req: AxiosRequestConfig<any>) => {
 
 instance.interceptors.response.use((res: AxiosResponse) => {
   return new Promise((resolve) => {
-    resolve(res.data);
+    resolve(res);
   })
 }, err => console.log(err));
 export default instance;
