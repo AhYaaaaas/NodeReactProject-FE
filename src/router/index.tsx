@@ -1,16 +1,17 @@
 /*
  * @Date: 2022-10-20 21:14:15
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-23 12:29:36
+ * @LastEditTime: 2022-10-23 20:40:18
  * @FilePath: \NodeReactProject-FE\src\router\index.tsx
  */
 import { useRoutes, RouteObject, BrowserRouter, Navigate } from "react-router-dom"
-import Login from "../components/login/index";
-import Register from "../components/register/index";
+import Login from "../pages/login/index";
+import Register from "../pages/register/index";
+import Home from "@/pages/home";
 const routes:RouteObject[] = [
   {
     path: '/',
-    element:<Navigate to="/login"/>
+    element:<Navigate to="/home"/>
   },
   {
     path: '/login',
@@ -19,6 +20,10 @@ const routes:RouteObject[] = [
   {
     path: "/register",
     element:<Register></Register>
+  },
+  {
+    path: "/home",
+    element:<Home></Home>
   },
   {
     path: '*',

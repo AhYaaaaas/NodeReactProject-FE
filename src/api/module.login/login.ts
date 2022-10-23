@@ -5,7 +5,7 @@
  * @FilePath: \NodeReactProject-FE\src\api\module.login\login.ts
  */
 import http from "@/utils/http";
-import { loginConfig, loginResponse } from "@/components/login/type";
+import { loginConfig, loginResponse } from "@/pages/login/type";
 import { createForm } from "@/utils/createForm";
 const loginMethods = {
   TokenLogin: async (loginConfig:loginConfig | {}) => {

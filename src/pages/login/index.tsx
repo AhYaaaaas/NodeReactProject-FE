@@ -24,21 +24,28 @@ export default function Login() {
   const [password, setPassword] = useState("默认密码");
   const [userInfo, setUserInfo] = useState({} as loginResponse["userInfo"]);
   const Navigate = useNavigate();
+
+
   useLayoutEffect(() => {
     _login({}, LOGINTYPE["TOKENLOGIN"]).then(
       (res) => {
         const { userInfo: info } = response;
         setUserInfo((obj) => Object.assign(obj, info));
+        window.sessionStorage.setItem('userinfo', JSON.stringify(userInfo));
       },
       (err) => console.log(err)
     );
   }, []);
+
+
   let response = {} as loginResponse;
   const login = async () => {
     response = await _login({ uAccount, password }, LOGINTYPE["ACCOUNTLOGIN"]);
     const { userInfo: info } = response;
     setUserInfo(() => info);
   };
+
+  
   return (
     <>
       <Wrapper>

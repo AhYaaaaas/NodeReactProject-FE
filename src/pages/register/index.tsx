@@ -1,10 +1,10 @@
 /*
  * @Date: 2022-10-20 21:32:51
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-23 12:26:11
+ * @LastEditTime: 2022-10-23 13:06:56
  * @FilePath: \NodeReactProject-FE\src\components\register\index.tsx
  */
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { getCode, identifyCode } from "@/api/module.register/code";
 import {
   StepExtend,
@@ -19,7 +19,6 @@ import {
 import { MailOutlined, CheckSquareTwoTone } from "@ant-design/icons";
 import { Form, Button } from "antd";
 import styled from "@emotion/styled";
-import _ from "lodash";
 import { inputStatusMap, placeholderMap } from "./type";
 import account_register from "@/api/module.register/register";
 const titles = ["填写邮箱", "验证邮箱", "设置密码", "设置昵称", "完成注册"];
@@ -48,7 +47,10 @@ const Register = () => {
   const container: Array<string> = useMemo(() => {
     return new Array(stepsAll);
   }, [stepsAll]);
-
+  useEffect(() => {
+    console.log(1);
+    setInputValue(() => "");
+  }, [current]);
   const timeCallback = function () {
     const t = setInterval(() => {
       if (timer > 1) setTimer((timer) => timer - 1);
@@ -103,13 +105,14 @@ const Register = () => {
         break;
       //提交注册
       case 3:
-        container[current] = inputValue
+        container[current] = inputValue;
         const registerResponse = await account_register({
           uEmail: container[0],
           password: container[2],
           userName: container[3],
         });
         console.log(registerResponse);
+
         break;
     }
     // 验证通过，放行
@@ -121,13 +124,10 @@ const Register = () => {
     } else {
       console.log("error");
     }
-    // 重置input框
-    form.resetFields();
   };
   const leftButton = () => {
     if (current > 0) {
       setCurrent((current) => current - 1);
-      form.resetFields();
     }
   };
   return (
@@ -142,14 +142,14 @@ const Register = () => {
           <>
             <Mail></Mail>
             <FormItemExtend name="mid">
-                <>
-                  <InputExtend
-                    prefix={labels[current]}
-                    value={inputValue}
-                    onChange={_.debounce((e) => setInputValue(e.target.value))}
-                    status={inputStatus}
-                    placeholder={placeStatus}
-                  />
+              <>
+                <InputExtend
+                  prefix={labels[current]}
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  status={inputStatus}
+                  placeholder={placeStatus}
+                />
 
                 {current === 1 ? (
                   <Button

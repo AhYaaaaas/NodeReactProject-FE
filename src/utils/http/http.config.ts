@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-21 19:40:04
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-22 23:36:45
+ * @LastEditTime: 2022-10-23 20:36:47
  * @FilePath: \NodeReactProject-FE\src\utils\http\http.config.ts
  */
 import {CreateAxiosDefaults} from "axios"
