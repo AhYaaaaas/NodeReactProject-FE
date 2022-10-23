@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-21 16:39:58
- * @LastEditors: xuanyi_ge xuanyige87@gmail.com
- * @LastEditTime: 2022-10-22 15:55:11
+ * @LastEditors: AhYaaaaas xuanyige87@gmail.com
+ * @LastEditTime: 2022-10-23 10:06:09
  * @FilePath: \NodeReactProject-FE\src\components\register\index.css.tsx
  */
 import styled from "@emotion/styled"
@@ -30,7 +30,7 @@ const FormExtend = styled(Form)`
   position:absolute;
   top:50%;
   left:50%;
-  transform: translateX(-50%) translateY(-75%);
+  transform: translateX(-50%) translateY(-50%);
   border-radius: 20px;
   display: flow-root;
   background-color: white;
