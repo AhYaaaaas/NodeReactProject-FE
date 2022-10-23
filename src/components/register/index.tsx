@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-20 21:32:51
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-23 11:23:57
+ * @LastEditTime: 2022-10-23 12:26:11
  * @FilePath: \NodeReactProject-FE\src\components\register\index.tsx
  */
 import React, { useMemo, useState } from "react";
@@ -142,33 +142,34 @@ const Register = () => {
           <>
             <Mail></Mail>
             <FormItemExtend name="mid">
-              <FormItemExtend name="input" style={{ width: "100%" }}>
-                <InputExtend
-                  prefix={labels[current]}
-                  value={inputValue}
-                  onChange={_.debounce((e) => setInputValue(e.target.value))}
-                  status={inputStatus}
-                  placeholder={placeStatus}
-                />
-              </FormItemExtend>
-              {current === 1 ? (
-                <Button
-                  size="small"
-                  disabled={isAbled}
-                  style={{
-                    position: "absolute",
-                    display: "block",
-                    top: "50%",
-                    height: "100%",
-                    transform: "translateY(-50%)",
-                    right: 0,
-                  }}
-                >
-                  {!isAbled ? "重发" : timer + "s"}
-                </Button>
-              ) : (
-                ""
-              )}
+                <>
+                  <InputExtend
+                    prefix={labels[current]}
+                    value={inputValue}
+                    onChange={_.debounce((e) => setInputValue(e.target.value))}
+                    status={inputStatus}
+                    placeholder={placeStatus}
+                  />
+
+                {current === 1 ? (
+                  <Button
+                    size="small"
+                    disabled={isAbled}
+                    style={{
+                      position: "absolute",
+                      display: "block",
+                      top: "50%",
+                      height: "100%",
+                      transform: "translateY(-50%)",
+                      right: 0,
+                    }}
+                  >
+                    {!isAbled ? "重发" : timer + "s"}
+                  </Button>
+                ) : (
+                  ""
+                )}
+              </>
             </FormItemExtend>
             <FormItemExtend
               name="buttons"
@@ -177,8 +178,10 @@ const Register = () => {
                 top: "90%",
               }}
             >
-              <RightCircleTwoToneExtend onClick={rightButton} />
-              <LeftCircleTwoToneExtend onClick={leftButton} name="left" />
+              <>
+                <RightCircleTwoToneExtend onClick={rightButton} />
+                <LeftCircleTwoToneExtend onClick={leftButton} name="left" />
+              </>
             </FormItemExtend>
           </>
         ) : (

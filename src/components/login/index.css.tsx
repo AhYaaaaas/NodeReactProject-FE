@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-21 13:02:12
- * @LastEditors: xuanyi_ge xuanyige87@gmail.com
- * @LastEditTime: 2022-10-21 21:54:43
+ * @LastEditors: AhYaaaaas xuanyige87@gmail.com
+ * @LastEditTime: 2022-10-23 12:15:05
  * @FilePath: \NodeReactProject-FE\src\components\login\index.css.tsx
  */
 import styled from "@emotion/styled"
@@ -52,7 +52,7 @@ const Circle = styled('div')`
 `
 const ButtonExtend = styled(Button)`
   display:block;
-  width:80%;
+  width:50%;
   margin: 0 auto;
   border-radius:20px;
 `

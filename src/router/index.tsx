@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-20 21:14:15
- * @LastEditors: xuanyi_ge xuanyige87@gmail.com
- * @LastEditTime: 2022-10-22 10:51:58
+ * @LastEditors: AhYaaaaas xuanyige87@gmail.com
+ * @LastEditTime: 2022-10-23 12:29:36
  * @FilePath: \NodeReactProject-FE\src\router\index.tsx
  */
 import { useRoutes, RouteObject, BrowserRouter, Navigate } from "react-router-dom"
@@ -10,7 +10,7 @@ import Register from "../components/register/index";
 const routes:RouteObject[] = [
   {
     path: '/',
-    element:<Navigate to="/register"/>
+    element:<Navigate to="/login"/>
   },
   {
     path: '/login',

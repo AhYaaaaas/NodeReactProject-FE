@@ -1,16 +1,24 @@
 /*
  * @Date: 2022-10-21 19:38:54
- * @LastEditors: xuanyi_ge xuanyige87@gmail.com
- * @LastEditTime: 2022-10-22 11:14:22
+ * @LastEditors: AhYaaaaas xuanyige87@gmail.com
+ * @LastEditTime: 2022-10-23 12:01:51
  * @FilePath: \NodeReactProject-FE\src\utils\http\index.ts
  */
 import axios from "axios";
 import { AxiosRequestConfig, AxiosInstance, AxiosResponse } from "axios";
+import { getToken, setToken } from "../token";
 import { httpConfig } from "./http.config";
 
 const instance: AxiosInstance = axios.create(httpConfig);
 instance.interceptors.request.use(
   (req: AxiosRequestConfig<any>) => {
+    const token = getToken();
+    if (token) {
+      req.headers = {
+        Authorization:token
+      }
+    }
+    console.log("req.header",req.headers);
     return req;
   },
   (err) => console.log(err)
@@ -18,6 +26,10 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (res: AxiosResponse) => {
+    const { token } = res.data;
+    if (token) {
+      setToken(token);
+    }
     return res.data
   },
   (err) => console.log(err)
