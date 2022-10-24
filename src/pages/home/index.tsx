@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-23 20:39:43
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-23 22:15:54
+ * @LastEditTime: 2022-10-24 20:01:55
  * @FilePath: \NodeReactProject-FE\src\pages\home\index.tsx
  */
 import {
@@ -15,6 +15,7 @@ import {
 import { Layout, Menu, Tag } from "antd";
 import React from "react";
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 const { Header, Content, Sider } = Layout;
 const titles = ['主页', '检索', '上传', '悬赏'];
 const Home: React.FC = () => {
@@ -88,7 +89,7 @@ const Home: React.FC = () => {
           </Tag>
         </div>
       </Sider>
-      <Layout>
+      <Layout style={{height:"100vh"}}>
         <Header
           className="site-layout-sub-header-background"
           style={{ padding: 0, backgroundColor: "#FAFAFA" }}
@@ -106,13 +107,14 @@ const Home: React.FC = () => {
             }}
           ></div>
         </Header>
-        <Content style={{ margin: "24px 16px 0" }}>
+        <Content style={{ marginLeft:"200px",height:"100%" }}>
           <div
             className="site-layout-background"
-            style={{ padding: 24, minHeight: 360 }}
+            style={{ padding: 24, height:"100%" }}
           >
-            content
+            <Outlet></Outlet>
           </div>
+        
         </Content>
       </Layout>
     </Layout>
