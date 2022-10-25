@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-21 19:38:54
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-23 12:01:51
+ * @LastEditTime: 2022-10-25 17:55:30
  * @FilePath: \NodeReactProject-FE\src\utils\http\index.ts
  */
 import axios from "axios";
@@ -27,6 +27,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (res: AxiosResponse) => {
     const { token } = res.data;
+    console.log("send token",token);
     if (token) {
       setToken(token);
     }

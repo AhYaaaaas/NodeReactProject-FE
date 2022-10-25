@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-24 19:33:59
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-24 23:57:27
+ * @LastEditTime: 2022-10-25 16:56:38
  * @FilePath: \NodeReactProject-FE\src\pages\home\components\readbook.tsx
  */
 import http from "@/utils/http";
@@ -48,7 +48,7 @@ export default function Readbook() {
   const getUrl = async function () {
     const res:ArrayBuffer = await http({
       method: "get",
-      url: "api/upload/book?bookName=1.pdf",
+      url: "api/upload/book?bookName=2.pdf",
       responseType: 'arraybuffer'
     })
     let blob = new Blob([res], { type: 'application/pdf' });

@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-20 21:14:15
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-24 23:22:36
+ * @LastEditTime: 2022-10-25 17:47:22
  * @FilePath: \NodeReactProject-FE\src\router\index.tsx
  */
 import { useRoutes, RouteObject, BrowserRouter, Navigate } from "react-router-dom"
@@ -9,11 +9,14 @@ import Login from "../pages/login/index";
 import Register from "../pages/register/index";
 import Home from "@/pages/home";
 import Readbook from "@/pages/home/components/readbook";
-import { Test } from "@/pages/home/components/test";
+import SelfDetails from "@/pages/home/components/details";
+import Search from "antd/lib/transfer/search";
+import Upload from "@/pages/home/components/upload";
+import Reward from "@/pages/home/components/reward";
 const routes:RouteObject[] = [
   {
     path: '/',
-    element:<Navigate to="/home/readbook"/>
+    element:<Navigate to="/login"/>
   },
   {
     path: '/login',
@@ -28,14 +31,30 @@ const routes:RouteObject[] = [
     element: <Home></Home>,
     children: [
       {
+        path: "",
+        element:<Navigate to="homepage"></Navigate>
+      },
+      {
         path: "readbook",
         element: <Readbook></Readbook>
+      },
+      {
+        path: 'homepage',
+        element: <SelfDetails></SelfDetails>
+      },
+      {
+        path: "search",
+        element:<Search></Search>
+      },
+      {
+        path: "upload",
+        element:<Upload></Upload>
+      },
+      {
+        path: "reward",
+        element:<Reward></Reward>
       }
     ]
-  },
-  {
-    path: "/test",
-    element:<Test></Test>
   },
   {
     path: '*',

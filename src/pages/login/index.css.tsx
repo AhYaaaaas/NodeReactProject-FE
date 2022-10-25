@@ -1,8 +1,8 @@
 /*
  * @Date: 2022-10-21 13:02:12
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-23 12:15:05
- * @FilePath: \NodeReactProject-FE\src\components\login\index.css.tsx
+ * @LastEditTime: 2022-10-25 15:41:06
+ * @FilePath: \NodeReactProject-FE\src\pages\login\index.css.tsx
  */
 import styled from "@emotion/styled"
 import { Button, Form, Input } from 'antd';
@@ -26,6 +26,8 @@ const FormExtend = styled(Form)`
   left:30%;
   display:flex;
   flex-direction: column;
+  height: 80vh;
+  width:30vw
 `
 const FormItemExtend = styled(Form.Item)`
 width: 90%;
@@ -33,6 +35,7 @@ position:relative;
 left:50%;
 margin-top: 1rem;
 transform:translateX(-50%);
+max-width: 400px;
 `
 const InputExtend = styled(Input)`
 border-radius: 20px;

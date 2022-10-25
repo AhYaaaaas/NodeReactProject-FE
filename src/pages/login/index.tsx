@@ -1,8 +1,8 @@
 /*
  * @Date: 2022-10-20 21:32:38
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-23 12:28:30
- * @FilePath: \NodeReactProject-FE\src\components\login\index.tsx
+ * @LastEditTime: 2022-10-25 18:36:35
+ * @FilePath: \NodeReactProject-FE\src\pages\login\index.tsx
  */
 import {
   Wrapper,
@@ -15,41 +15,54 @@ import {
 } from "./index.css";
 import _ from "lodash";
 import { loginResponse } from "./type";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import _login from "@/api/module.login/login";
 import { LOGINTYPE } from "@/api/module.login/login";
 import { useNavigate } from "react-router-dom";
+import { Alert, Form } from "antd";
 export default function Login() {
   const [uAccount, setAccount] = useState("默认账号");
   const [password, setPassword] = useState("默认密码");
   const [userInfo, setUserInfo] = useState({} as loginResponse["userInfo"]);
+  const [isError, setError] = useState<Boolean>(false);
   const Navigate = useNavigate();
+  const [form] = Form.useForm();
+  const dump = (info: loginResponse["userInfo"]) => {
+    setUserInfo((obj) => {
+      return Object.assign(obj, info);
+    });
+    window.localStorage.setItem('userinfo', JSON.stringify(info));
+    Navigate(`/home/homepage?uid=${info.uid}`);
+  };
 
-
-  useLayoutEffect(() => {
+  useEffect(() => {
     _login({}, LOGINTYPE["TOKENLOGIN"]).then(
       (res) => {
-        const { userInfo: info } = response;
-        setUserInfo((obj) => Object.assign(obj, info));
-        window.sessionStorage.setItem('userinfo', JSON.stringify(userInfo));
+        console.log(res);
+        const { userInfo: info } = res;
+        console.log(info);
+        if (info) {
+          dump(info);
+        }
       },
       (err) => console.log(err)
     );
   }, []);
 
-
   let response = {} as loginResponse;
   const login = async () => {
     response = await _login({ uAccount, password }, LOGINTYPE["ACCOUNTLOGIN"]);
     const { userInfo: info } = response;
-    setUserInfo(() => info);
+    if (info) {
+      dump(info);
+    } else {
+      setError(true);
+    }
   };
-
-  
   return (
     <>
       <Wrapper>
-        <FormExtend>
+        <FormExtend form={form}>
           <Circle></Circle>
           <TextBox>BOOK</TextBox>
           <div className="dataArea">
@@ -86,9 +99,9 @@ export default function Login() {
                     top: "50%",
                     transform: "translateY(-50%)",
                     right: "10%",
-                    cursor:"pointer"
+                    cursor: "pointer",
                   }}
-                  onClick = {()=>Navigate('/register')}
+                  onClick={() => Navigate("/register")}
                 >
                   注册
                 </span>
@@ -96,6 +109,24 @@ export default function Login() {
             </FormItemExtend>
           </div>
         </FormExtend>
+        {isError && (
+          <Alert
+            message="Error Text"
+            description="账号或密码错误!"
+            type="error"
+            closable
+            style={{
+              width: "30vw",
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translateY(-50%) translateX(-50%)",
+            }}
+            onClose={() => {
+              form.resetFields();
+            }}
+          />
+        )}
       </Wrapper>
     </>
   );
