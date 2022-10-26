@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-23 20:39:43
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-25 20:02:30
+ * @LastEditTime: 2022-10-25 23:13:40
  * @FilePath: \NodeReactProject-FE\src\pages\home\index.tsx
  */
 import {
@@ -128,7 +128,7 @@ const Home: React.FC = () => {
               height: "2rem",
               width: "2rem",
               position: "absolute",
-              right: "10%",
+              right: "5rem",
               top: "50%",
               transform: "translateY(-50%)",
               lineHeight: "2rem",
@@ -140,7 +140,7 @@ const Home: React.FC = () => {
           <p
             style={{
               position: "absolute",
-              right: "5%",
+              right:"1rem",
               cursor: "pointer",
               fontFamily: "fantasy",
             }}
