@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-21 19:38:54
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-25 17:55:30
+ * @LastEditTime: 2022-10-27 20:58:32
  * @FilePath: \NodeReactProject-FE\src\utils\http\index.ts
  */
 import axios from "axios";
@@ -18,7 +18,6 @@ instance.interceptors.request.use(
         Authorization:token
       }
     }
-    console.log("req.header",req.headers);
     return req;
   },
   (err) => console.log(err)
@@ -27,7 +26,6 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (res: AxiosResponse) => {
     const { token } = res.data;
-    console.log("send token",token);
     if (token) {
       setToken(token);
     }

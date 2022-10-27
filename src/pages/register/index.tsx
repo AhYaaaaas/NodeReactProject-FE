@@ -1,8 +1,8 @@
 /*
  * @Date: 2022-10-20 21:32:51
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-23 13:06:56
- * @FilePath: \NodeReactProject-FE\src\components\register\index.tsx
+ * @LastEditTime: 2022-10-27 20:47:09
+ * @FilePath: \NodeReactProject-FE\src\pages\register\index.tsx
  */
 import React, { useEffect, useMemo, useState } from "react";
 import { getCode, identifyCode } from "@/api/module.register/code";
@@ -21,6 +21,7 @@ import { Form, Button } from "antd";
 import styled from "@emotion/styled";
 import { inputStatusMap, placeholderMap } from "./type";
 import account_register from "@/api/module.register/register";
+import addUserHistory from "@/api/module.home/addUserHistory";
 const titles = ["填写邮箱", "验证邮箱", "设置密码", "设置昵称", "完成注册"];
 
 const labels = ["Email", "Code", "Password", "昵称", ""];
@@ -111,8 +112,8 @@ const Register = () => {
           password: container[2],
           userName: container[3],
         });
-        console.log(registerResponse);
-
+        const { uid } = registerResponse!;
+        await addUserHistory({ uid, description: "Register account" });
         break;
     }
     // 验证通过，放行
