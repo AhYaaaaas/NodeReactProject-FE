@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-20 21:14:15
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-25 17:47:22
+ * @LastEditTime: 2022-10-29 10:30:31
  * @FilePath: \NodeReactProject-FE\src\router\index.tsx
  */
 import { useRoutes, RouteObject, BrowserRouter, Navigate } from "react-router-dom"
@@ -10,7 +10,7 @@ import Register from "../pages/register/index";
 import Home from "@/pages/home";
 import Readbook from "@/pages/home/components/readbook";
 import SelfDetails from "@/pages/home/components/details";
-import Search from "antd/lib/transfer/search";
+import Search from "@/pages/home/components/search";
 import Upload from "@/pages/home/components/upload";
 import Reward from "@/pages/home/components/reward";
 const routes:RouteObject[] = [

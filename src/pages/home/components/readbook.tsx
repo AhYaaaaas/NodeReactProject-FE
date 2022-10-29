@@ -1,13 +1,14 @@
 /*
  * @Date: 2022-10-24 19:33:59
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-25 16:56:38
+ * @LastEditTime: 2022-10-29 21:36:03
  * @FilePath: \NodeReactProject-FE\src\pages\home\components\readbook.tsx
  */
-import http from "@/utils/http";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { PushlishedComments } from "./item";
 import { Icomment } from "./type";
+import { httpConfig } from "@/utils/http/http.config";
 export default function Readbook() {
   const comments: Icomment[] = [
     {
@@ -43,21 +44,15 @@ export default function Readbook() {
       date: new Date().toLocaleDateString(),
       comment: "goodgoodgoodgood",
     }
-  ]; 
+  ];
   const [url, setUrl] = useState<any>()
-  const getUrl = async function () {
-    const res:ArrayBuffer = await http({
-      method: "get",
-      url: "api/upload/book?bookName=2.pdf",
-      responseType: 'arraybuffer'
-    })
-    let blob = new Blob([res], { type: 'application/pdf' });
-    let testUrl = window.URL.createObjectURL(blob);
-    setUrl(testUrl);
-  }
   const iframe = useRef<HTMLIFrameElement>(null);
+  const [getPs] = useSearchParams();
+  const [uid, bookName] = [getPs.get('uid')!, getPs.get('bookName')];
+  const navigate = useNavigate();
   useEffect(() => {
-    getUrl();
+    if (!bookName) navigate('/home/search?uid=' + uid);
+    else setUrl(()=>httpConfig.baseURL +`/books/${uid + bookName}`)
   },[])
   return (
     <div

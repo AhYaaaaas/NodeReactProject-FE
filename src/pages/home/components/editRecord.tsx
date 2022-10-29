@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-26 22:24:23
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-28 22:17:37
+ * @LastEditTime: 2022-10-29 20:31:39
  * @FilePath: \NodeReactProject-FE\src\pages\home\components\editRecord.tsx
  */
 import { Timeline } from "antd";
@@ -28,7 +28,7 @@ export default function EditRecord () {
     >
       <h1 style={{ fontSize: "2rem", fontWeight: "lighter" }}>Travel Footprint</h1>
       <hr />
-      <Timeline style={{marginTop:"2rem"}}>
+      <Timeline style={{marginTop:"2rem",overflowY:'scroll',height:"100%"}}>
         {
           records && records.map((item,index) => {
             return <Timeline.Item key={index + 1}>{item.description} &nbsp; {item.actionstime }</Timeline.Item>

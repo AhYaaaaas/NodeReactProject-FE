@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-23 20:39:43
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-25 23:13:40
+ * @LastEditTime: 2022-10-29 22:20:59
  * @FilePath: \NodeReactProject-FE\src\pages\home\index.tsx
  */
 import {
@@ -16,29 +16,41 @@ import {
 import { Layout, Menu, Tag } from "antd";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
+import { Outlet, useNavigate, useOutlet, useSearchParams } from "react-router-dom";
 import { loginResponse } from "../login/type";
 import { httpConfig } from "@/utils/http/http.config";
 import getAvatarAddress from "@/api/module.home/getAvatarAddress";
 const { Header, Content, Sider } = Layout;
 const titles = ["主页", "检索", "上传", "悬赏", "阅读"];
 const urlName = ["/homepage", "/search", "/upload", "/reward", "/readbook"];
+
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const [getPs,setPs] = useSearchParams()
+  const [getPs, setPs] = useSearchParams();
   const [selectedItem, setSelectedItem] = useState(1);
   const [defaultAvatar, setAvatar] = useState(
-    httpConfig + "/avatar/default.jpeg"
+    httpConfig.baseURL + "/avatar/default.jpeg"
   );
   const [userInfo, setUserInfo] = useState<loginResponse["userInfo"]>();
   const [userName, setUserName] = useState<string>();
+  const OUTLET = useOutlet()!;
   useEffect(() => {
     const info = window.localStorage.getItem("userinfo") || "{}";
     const result: loginResponse["userInfo"] = JSON.parse(info);
     setUserInfo(() => result);
     setUserName(() => result.userName);
-    getAvatarAddress(getPs.get('uid')!).then((res) => setAvatar(res));
+    getAvatarAddress(getPs.get("uid")!).then((res) => setAvatar(res));
   }, []);
+  // 设置被选择的Tab高亮
+  useEffect(() => {
+    const pathname = OUTLET.props.children.props.match.pathname;
+    const index = urlName.findIndex((item) => {
+      return "/home"+item === pathname
+    })
+    console.log(index);
+    setSelectedItem(()=>index + 1);
+  }, [OUTLET])
+  
   return (
     <Layout
       style={{
@@ -64,7 +76,8 @@ const Home: React.FC = () => {
           }}
           theme="light"
           mode="inline"
-          defaultSelectedKeys={[selectedItem.toString()]}
+          defaultSelectedKeys={['1']}
+          selectedKeys = {[selectedItem.toString()]}
           items={[
             UserOutlined,
             VideoCameraOutlined,
@@ -140,7 +153,7 @@ const Home: React.FC = () => {
           <p
             style={{
               position: "absolute",
-              right:"1rem",
+              right: "1rem",
               cursor: "pointer",
               fontFamily: "fantasy",
             }}
