@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-24 19:36:04
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-26 22:31:27
+ * @LastEditTime: 2022-10-30 10:56:43
  * @FilePath: \NodeReactProject-FE\src\pages\home\components\type.ts
  */
 import { loginResponse } from "@/pages/login/type";

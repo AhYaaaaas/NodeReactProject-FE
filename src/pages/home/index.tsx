@@ -50,7 +50,6 @@ const Home: React.FC = () => {
     console.log(index);
     setSelectedItem(()=>index + 1);
   }, [OUTLET])
-  
   return (
     <Layout
       style={{

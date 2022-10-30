@@ -1,13 +1,13 @@
 /*
  * @Date: 2022-10-23 22:12:06
  * @LastEditors: AhYaaaaas xuanyige87@gmail.com
- * @LastEditTime: 2022-10-29 21:53:26
+ * @LastEditTime: 2022-10-30 10:44:15
  * @FilePath: \NodeReactProject-FE\src\pages\home\components\search.tsx
  */
 
 import { Button, Card, Input } from "antd";
 import Meta from "antd/lib/card/Meta";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import searchBook, { ISearchBookResponse } from "@/api/module.home/searchBook";
 import addUserHistory from "@/api/module.home/addUserHistory";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -103,7 +103,7 @@ export default function SearchHome() {
                     >
                       <Button
                         onClick={() => {
-                          navigate(`/home/readbook?uid=${uid}&&bookName=${encodeURI(item.bookname)}`);
+                          navigate(`/home/readbook?uid=${uid}&&bookName=${encodeURI(item.bookname)}`,{state:{bookid:item.bookid}});
                       }}>阅读</Button>
                       <Button
                         type="primary"
